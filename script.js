@@ -23,20 +23,33 @@ const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
 // Starting condition
-score0El.textContent = '0';
-score1El.textContent = '0';
-diceEl.classList.add('hidden');
+let scores, currentScore, activePlayer, playing;
 
-// because remember that player number 1 is player 0
-// and player 2 is here in our code player number 1.
-// And in fact, let me explain you right away, why that is.
-// So the reason is that we will store the scores
-// of both players in an array.
-// And remember that the array is zero-based
-const scores = [0, 0];
-let currentScore = 0;
-let activePlayer = 0;
-let playing = true;
+const init = function () {
+  // because remember that player number 1 is player 0
+  // and player 2 is here in our code player number 1.
+  // And in fact, let me explain you right away, why that is.
+  // So the reason is that we will store the scores
+  // of both players in an array.
+  // And remember that the array is zero-based
+  scores = [0, 0];
+  currentScore = 0;
+  activePlayer = 0;
+  playing = true;
+
+  score0El.textContent = '0';
+  score1El.textContent = '0';
+  current0El.textContent = '0';
+  current1El.textContent = '0';
+
+  diceEl.classList.add('hidden');
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
+};
+
+init();
 
 const switchPlayer = function () {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
@@ -107,3 +120,5 @@ btnHold.addEventListener('click', function () {
     }
   }
 });
+
+btnNew.addEventListener('click', init);
